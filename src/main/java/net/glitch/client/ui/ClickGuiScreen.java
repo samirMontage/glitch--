@@ -46,7 +46,6 @@ public class ClickGuiScreen extends Screen {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    @Override
     public boolean shouldPause() {
         return false;
     }
