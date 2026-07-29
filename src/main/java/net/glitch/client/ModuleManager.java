@@ -13,22 +13,18 @@ public class ModuleManager {
     private final List<Module> modules = new ArrayList<>();
 
     public ModuleManager() {
+        // Боевые модули
         modules.add(new AutoTotem());
         modules.add(new KillAura());
+        
+        // Рендер и утилиты
         modules.add(new ClickGuiModule());
+        modules.add(new Module("Fullbright", Category.RENDER));
+        modules.add(new Module("AutoSprint", Category.MOVEMENT));
+        modules.add(new Module("ESP", Category.RENDER));
     }
 
     public List<Module> getModules() {
         return modules;
-    }
-
-    public List<Module> getModulesByCategory(Category category) {
-        List<Module> matched = new ArrayList<>();
-        for (Module module : modules) {
-            if (module.getCategory() == category) {
-                matched.add(module);
-            }
-        }
-        return matched;
     }
 }
