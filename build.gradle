@@ -1,17 +1,14 @@
-pluginManagement {
+buildscript {
     repositories {
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
+        maven { url = 'https://maven.fabricmc.net/' }
         mavenCentral()
-        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'net.fabricmc:fabric-loom:0.12-SNAPSHOT'
     }
 }
 
-plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
-}
+apply plugin: 'fabric-loom'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -20,9 +17,7 @@ archivesBaseName = "Glitch-Client"
 version = "1.0.0"
 
 repositories {
-    maven {
-        url = 'https://maven.fabricmc.net/'
-    }
+    maven { url = 'https://maven.fabricmc.net/' }
     mavenCentral()
 }
 
