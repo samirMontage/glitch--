@@ -8,10 +8,13 @@ buildscript {
     }
 }
 
+apply plugin: 'java'
 apply plugin: 'fabric-loom'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 archivesBaseName = "Glitch-Client"
 version = "1.0.0"
