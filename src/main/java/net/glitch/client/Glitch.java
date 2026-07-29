@@ -1,7 +1,6 @@
 package net.glitch.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.glitch.client.ModuleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +15,9 @@ public class Glitch implements ClientModInitializer {
     public void onInitializeClient() {
         INSTANCE = this;
         LOGGER.info("Initializing Glitch Client...");
+        
+        GlitchKeys.register(); // Регистрируем правый Shift
+        ClientTickHandler.init(); // Подключаем отслеживание нажатия
         
         moduleManager = new ModuleManager();
     }
