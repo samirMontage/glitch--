@@ -12,7 +12,7 @@ public class GlitchScreen extends Screen {
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-        drawCenteredText(matrices, this.textRenderer, "Glitch Client v1.0.0", this.width / 2, 40, 0xFFFFFF);
+        this.textRenderer.drawWithShadow(matrices, "Glitch Client v1.0.0", (float)(this.width / 2 - 50), (float)(this.height / 2 - 10), 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
 
