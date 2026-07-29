@@ -15,9 +15,4 @@ public class GlitchScreen extends Screen {
         this.textRenderer.drawWithShadow(matrices, "Glitch Client v1.0.0", (float)(this.width / 2 - 50), (float)(this.height / 2 - 10), 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
     }
-
-    @Override
-    public boolean shouldPause() {
-        return false;
-    }
 }
