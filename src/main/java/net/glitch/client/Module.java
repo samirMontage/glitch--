@@ -1,11 +1,16 @@
 package net.glitch.client;
 
+import net.glitch.client.setting.Setting;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Module {
     private final String name;
     private final String description;
     private final Category category;
     private int key;
     private boolean toggled;
+    private final List<Setting<?>> settings = new ArrayList<>();
 
     public Module(String name, String description, Category category, int key) {
         this.name = name;
@@ -13,6 +18,14 @@ public abstract class Module {
         this.category = category;
         this.key = key;
         this.toggled = false;
+    }
+
+    public void addSetting(Setting<?> setting) {
+        this.settings.add(setting);
+    }
+
+    public List<Setting<?>> getSettings() {
+        return settings;
     }
 
     public void toggle() {
