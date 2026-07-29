@@ -16,28 +16,25 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // 1. Рисуем затемнение фона
         this.renderBackground(matrices);
 
-        // 2. Рисуем заголовок
         drawCenteredText(matrices, this.textRenderer, "Glitch Client — ClickGUI", this.width / 2, 20, 0xFFFFFFFF);
 
-        // 3. Рисуем список модулей
         if (Glitch.INSTANCE != null && Glitch.INSTANCE.getModuleManager() != null) {
             List<Module> modules = Glitch.INSTANCE.getModuleManager().getModules();
 
             int x = 50;
             int y = 50;
 
-            if (modules == null || modules.isEmpty()) {
-                drawStringWithShadow(matrices, this.textRenderer, "Нет загруженных модулей...", x, y, 0xAAAAAA);
-            } else {
+            if (modules != null) {
                 for (Module module : modules) {
-                    // Рисуем рамку плашки
-                    fill(matrices, x, y, x + 130, y + 20, 0xAA000000);
+                    // Если модуль включен — подсвечиваем плашку зеленым акцентом, иначе темно-серым
+                    int bgColor = module.isEnabled() ? 0xDD228B22 : 0xAA111111;
+                    fill(matrices, x, y, x + 130, y + 20, bgColor);
 
-                    // Отрисовываем название модуля
-                    drawStringWithShadow(matrices, this.textRenderer, module.getName(), x + 8, y + 6, 0xFFFFFFFF);
+                    // Цвет текста
+                    int textColor = module.isEnabled() ? 0xFF55FF55 : 0xCCCCCCCC;
+                    drawStringWithShadow(matrices, this.textRenderer, module.getName(), x + 8, y + 6, textColor);
 
                     y += 25;
                 }
@@ -45,6 +42,30 @@ public class ClickGuiScreen extends Screen {
         }
 
         super.render(matrices, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        // Проверяем клик ЛКМ (button == 0)
+        if (button == 0 && Glitch.INSTANCE != null && Glitch.INSTANCE.getModuleManager() != null) {
+            List<Module> modules = Glitch.INSTANCE.getModuleManager().getModules();
+
+            int x = 50;
+            int y = 50;
+
+            if (modules != null) {
+                for (Module module : modules) {
+                    // Проверяем, попал ли курсор в границы плашки модуля
+                    if (mouseX >= x && mouseX <= x + 130 && mouseY >= y && mouseY <= y + 20) {
+                        module.toggle(); // Переключаем модуль!
+                        return true;
+                    }
+                    y += 25;
+                }
+            }
+        }
+
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     @Override
