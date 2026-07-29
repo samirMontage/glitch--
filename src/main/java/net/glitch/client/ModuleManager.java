@@ -1,6 +1,9 @@
 package net.glitch.client;
 
 import net.glitch.client.module.ClickGuiModule;
+import net.glitch.client.module.combat.AutoTotem;
+import net.glitch.client.module.combat.KillAura;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +12,10 @@ public class ModuleManager {
     private final List<Module> modules = new ArrayList<>();
 
     public ModuleManager() {
-        // Регистрируем наш ClickGUI
+        // Регистрируем все наши модули
         register(new ClickGuiModule());
+        register(new AutoTotem());
+        register(new KillAura());
     }
 
     private void register(Module module) {
