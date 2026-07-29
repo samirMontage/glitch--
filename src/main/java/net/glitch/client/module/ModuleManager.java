@@ -7,20 +7,13 @@ public class ModuleManager {
     private final List<Module> modules = new ArrayList<>();
 
     public ModuleManager() {
-        // Тут позже будут добавляться твои модули
+        // Добавляем тестовые модули
+        modules.add(new Module("Fullbright", Category.RENDER));
+        modules.add(new Module("AutoSprint", Category.MOVEMENT));
+        modules.add(new Module("ESP", Category.RENDER));
     }
 
     public List<Module> getModules() {
         return modules;
-    }
-
-    public List<Module> getModulesByCategory(Category category) {
-        List<Module> categoryModules = new ArrayList<>();
-        for (Module module : modules) {
-            if (module.getCategory() == category) {
-                categoryModules.add(module);
-            }
-        }
-        return categoryModules;
     }
 }
