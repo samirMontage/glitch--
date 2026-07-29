@@ -7,7 +7,7 @@ public class Module {
     private int key;
     private boolean enabled;
 
-    // Конструктор с 4 аргументами (для ClickGuiModule и других)
+    // Конструктор на 4 аргумента
     public Module(String name, String description, Category category, int key) {
         this.name = name;
         this.description = description;
@@ -16,7 +16,7 @@ public class Module {
         this.enabled = false;
     }
 
-    // Конструктор с 2 аргументами (для упрощенных модулей)
+    // Конструктор на 2 аргумента
     public Module(String name, Category category) {
         this(name, "", category, 0);
     }
@@ -45,7 +45,6 @@ public class Module {
         return enabled;
     }
 
-    // Алиас для isEnabled(), чтобы AutoTotem и другие модули не выдавали ошибку
     public boolean isToggled() {
         return enabled;
     }
