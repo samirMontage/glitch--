@@ -23,7 +23,7 @@ public class KillAura extends Module {
         for (Entity entity : client.world.getEntities()) {
             if (entity == client.player) continue;
             if (!(entity instanceof LivingEntity)) continue;
-            if (((LivingEntity) entity).isDead()) continue;
+            if (!entity.isAlive()) continue;
             
             if (entity instanceof PlayerEntity || entity instanceof LivingEntity) {
                 double dist = client.player.distanceTo(entity);
