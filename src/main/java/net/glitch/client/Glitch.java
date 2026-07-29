@@ -3,7 +3,7 @@ package net.glitch.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.glitch.client.module.ModuleManager;
 import net.glitch.client.ui.ClickGuiScreen;
@@ -19,7 +19,6 @@ public class Glitch implements ClientModInitializer {
         INSTANCE = this;
         moduleManager = new ModuleManager();
 
-        // Регистрируем клавишу RSHIFT для открытия ClickGUI
         clickGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.glitch.clickgui",
                 InputUtil.Type.KEYSYM,
@@ -27,7 +26,6 @@ public class Glitch implements ClientModInitializer {
                 "category.glitch"
         ));
 
-        // Отслеживаем нажатие каждый тик
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (clickGuiKey.wasPressed()) {
                 if (client.currentScreen == null) {
