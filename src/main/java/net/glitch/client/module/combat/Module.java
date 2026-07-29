@@ -1,20 +1,38 @@
 package net.glitch.client.module;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Module {
     private final String name;
     private String description;
     private Category category;
     private int key;
     private boolean enabled;
+    
+    // Список настроек (чтобы методы addSetting не вызывали ошибок)
+    private final List<Object> settings = new ArrayList<>();
 
-    public Module(String name, Category category) {
+    // Конструктор на 4 аргумента (для ClickGuiModule)
+    public Module(String name, String description, Category category, int key) {
         this.name = name;
+        this.description = description;
         this.category = category;
+        this.key = key;
         this.enabled = false;
     }
 
+    // Конструктор на 2 аргумента (для остальных модулей)
+    public Module(String name, Category category) {
+        this(name, "", category, 0);
+    }
+
     public String getName() { return name; }
+    public String getDescription() { return description; }
     public Category getCategory() { return category; }
+    public int getKey() { return key; }
+    public void setKey(int key) { this.key = key; }
+
     public boolean isEnabled() { return enabled; }
     public boolean isToggled() { return enabled; }
 
@@ -27,6 +45,11 @@ public class Module {
         } else {
             onDisable();
         }
+    }
+
+    // Заглушка для добавления настроек, чтобы компилятор не ругался
+    public void addSetting(Object setting) {
+        this.settings.add(setting);
     }
 
     public void onEnable() {}
