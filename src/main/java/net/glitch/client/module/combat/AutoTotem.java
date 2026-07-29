@@ -2,6 +2,7 @@ package net.glitch.client.module.combat;
 
 import net.glitch.client.module.Category;
 import net.glitch.client.module.Module;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
 
@@ -16,7 +17,6 @@ public class AutoTotem extends Module {
         if (!isEnabled()) return;
         if (client.player == null || client.interactionManager == null) return;
 
-        // Если в левой руке уже тотем — ничего не делаем
         if (client.player.getOffHandStack().getItem() == Items.TOTEM_OF_UNDYING) {
             delay = 0;
             return;
@@ -27,36 +27,25 @@ public class AutoTotem extends Module {
             return;
         }
 
-        // Ищем тотем в инвентаре
         for (int i = 0; i < 36; i++) {
-            var stack = client.player.getInventory().getStack(i);
+            ItemStack stack = client.player.getInventory().getStack(i);
             if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
                 int slot = i < 9 ? i + 36 : i;
                 
-                // Безопасный перенос для античита
                 client.interactionManager.clickSlot(
                     client.player.currentScreenHandler.syncId,
-                    slot,
-                    0,
-                    SlotActionType.PICKUP,
-                    client.player
+                    slot, 0, SlotActionType.PICKUP, client.player
                 );
                 client.interactionManager.clickSlot(
                     client.player.currentScreenHandler.syncId,
-                    45, // Слот левой руки
-                    0,
-                    SlotActionType.PICKUP,
-                    client.player
+                    45, 0, SlotActionType.PICKUP, client.player
                 );
                 client.interactionManager.clickSlot(
                     client.player.currentScreenHandler.syncId,
-                    slot,
-                    0,
-                    SlotActionType.PICKUP,
-                    client.player
+                    slot, 0, SlotActionType.PICKUP, client.player
                 );
                 
-                delay = 5; // Задержка в 5 тиков, чтобы античит не кикал за быстрый дроп/клики
+                delay = 5;
                 break;
             }
         }
