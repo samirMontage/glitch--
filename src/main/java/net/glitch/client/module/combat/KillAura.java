@@ -5,6 +5,7 @@ import net.glitch.client.module.Module;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Hand;
 
 public class KillAura extends Module {
     private int ticks = 0;
@@ -20,6 +21,7 @@ public class KillAura extends Module {
         Entity target = null;
         double minDistance = 4.2;
 
+        // Перебираем загруженные сущности в мире
         for (Entity entity : client.world.getEntities()) {
             if (entity == client.player) continue;
             if (!(entity instanceof LivingEntity)) continue;
@@ -38,7 +40,7 @@ public class KillAura extends Module {
             ticks++;
             if (ticks >= 10) {
                 client.interactionManager.attackEntity(client.player, target);
-                client.player.swingHand(net.minecraft.util.Hand.MAIN_HAND);
+                client.player.swingHand(Hand.MAIN_HAND);
                 ticks = 0;
             }
         }
