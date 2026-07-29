@@ -1,5 +1,16 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 plugins {
-    id 'fabric-loom' version '0.10-SNAPSHOT'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -9,6 +20,9 @@ archivesBaseName = "Glitch-Client"
 version = "1.0.0"
 
 repositories {
+    maven {
+        url = 'https://maven.fabricmc.net/'
+    }
     mavenCentral()
 }
 
