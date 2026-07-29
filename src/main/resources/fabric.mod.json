@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "glitch",
+  "version": "1.0.0",
+  "name": "Glitch Client",
+  "description": "Custom client for 1.16.5",
+  "entrypoints": {
+    "main": [
+      "net.glitch.client.Glitch"
+    ]
+  },
+  "environment": "*"
+}
