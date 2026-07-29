@@ -7,7 +7,7 @@ public class ModuleManager {
     private final List<Module> modules = new ArrayList<>();
 
     public ModuleManager() {
-        // Здесь будущие модули (KillAura, AutoTotem и т.д.)
+        // Тут позже будут добавляться твои модули
     }
 
     public List<Module> getModules() {
