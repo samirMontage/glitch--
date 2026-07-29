@@ -1,27 +1,28 @@
 {
   "schemaVersion": 1,
   "id": "glitch",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "Glitch Client",
-  "description": "Custom Minecraft Client for 1.16.5",
+  "description": "A custom client mod",
   "authors": [
     "SamirTOcreator"
   ],
   "contact": {},
   "license": "MIT",
   "icon": "assets/glitch/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.glitch.client.Glitch"
-    ],
     "client": [
       "net.glitch.client.Glitch"
     ]
   },
+  "mixins": [
+    "glitch.mixins.json"
+  ],
   "depends": {
-    "fabricloader": ">=0.14.24",
-    "fabric": "*",
-    "minecraft": "1.16.5"
+    "fabricloader": ">=0.12.0",
+    "minecraft": "1.16.5",
+    "java": ">=16",
+    "fabric": "*"
   }
 }
