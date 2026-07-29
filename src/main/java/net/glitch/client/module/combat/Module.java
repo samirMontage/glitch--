@@ -9,11 +9,9 @@ public class Module {
     private Category category;
     private int key;
     private boolean enabled;
-    
-    // Список настроек (чтобы методы addSetting не вызывали ошибок)
     private final List<Object> settings = new ArrayList<>();
 
-    // Конструктор на 4 аргумента (для ClickGuiModule)
+    // Конструктор на 4 аргумента (имя, описание, категория, клавиша)
     public Module(String name, String description, Category category, int key) {
         this.name = name;
         this.description = description;
@@ -22,7 +20,12 @@ public class Module {
         this.enabled = false;
     }
 
-    // Конструктор на 2 аргумента (для остальных модулей)
+    // Конструктор на 3 аргумента (имя, описание, категория)
+    public Module(String name, String description, Category category) {
+        this(name, description, category, 0);
+    }
+
+    // Конструктор на 2 аргумента (имя, категория)
     public Module(String name, Category category) {
         this(name, "", category, 0);
     }
@@ -40,14 +43,9 @@ public class Module {
 
     public void toggle() {
         this.enabled = !this.enabled;
-        if (this.enabled) {
-            onEnable();
-        } else {
-            onDisable();
-        }
+        if (this.enabled) { onEnable(); } else { onDisable(); }
     }
 
-    // Заглушка для добавления настроек, чтобы компилятор не ругался
     public void addSetting(Object setting) {
         this.settings.add(setting);
     }
