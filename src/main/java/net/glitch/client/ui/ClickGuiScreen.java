@@ -16,31 +16,30 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // 1. Отрисовываем затемнение фона
+        // 1. Рисуем затемнение фона
         this.renderBackground(matrices);
 
-        // 2. Рисуем заголовок меню в центре сверху
+        // 2. Рисуем заголовок
         drawCenteredText(matrices, this.textRenderer, "Glitch Client — ClickGUI", this.width / 2, 20, 0xFFFFFFFF);
 
-        // 3. Выводим список модулей плашками
+        // 3. Рисуем список модулей
         if (Glitch.INSTANCE != null && Glitch.INSTANCE.getModuleManager() != null) {
             List<Module> modules = Glitch.INSTANCE.getModuleManager().getModules();
-            
+
             int x = 50;
             int y = 50;
 
-            if (modules.isEmpty()) {
+            if (modules == null || modules.isEmpty()) {
                 drawStringWithShadow(matrices, this.textRenderer, "Нет загруженных модулей...", x, y, 0xAAAAAA);
             } else {
                 for (Module module : modules) {
-                    // Рисуем задний фон для модуля (плашка)
-                    fill(matrices, x, y, x + 120, y + 20, 0x88000000);
-                    
-                    // Зеленый цвет если включен, белый если выключен
-                    int color = module.isEnabled() ? 0xFF00FF00 : 0xFFFFFFFF;
-                    drawStringWithShadow(matrices, this.textRenderer, module.getName(), x + 5, y + 6, color);
-                    
-                    y += 25; // Смещение вниз для следующего модуля
+                    // Рисуем рамку плашки
+                    fill(matrices, x, y, x + 130, y + 20, 0xAA000000);
+
+                    // Отрисовываем название модуля
+                    drawStringWithShadow(matrices, this.textRenderer, module.getName(), x + 8, y + 6, 0xFFFFFFFF);
+
+                    y += 25;
                 }
             }
         }
@@ -50,6 +49,6 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public boolean isPauseScreen() {
-        return false; // Чтобы игра не вставала на паузу в одиночке при открытии GUI
+        return false;
     }
 }
