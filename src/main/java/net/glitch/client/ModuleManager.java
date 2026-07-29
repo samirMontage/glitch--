@@ -13,11 +13,11 @@ public class ModuleManager {
     private final List<Module> modules = new ArrayList<>();
 
     public ModuleManager() {
-        // Боевые модули
+        // Добавляем наши рабочие боевые модули
         modules.add(new AutoTotem());
         modules.add(new KillAura());
         
-        // Рендер и утилиты
+        // Интерфейс и остальные утилиты
         modules.add(new ClickGuiModule());
         modules.add(new Module("Fullbright", Category.RENDER));
         modules.add(new Module("AutoSprint", Category.MOVEMENT));
