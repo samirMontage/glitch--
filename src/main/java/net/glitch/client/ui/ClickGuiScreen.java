@@ -31,7 +31,6 @@ public class ClickGuiScreen extends Screen {
         super.render(matrices, mouseX, mouseY, delta);
     }
 
-    @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 0 && Glitch.getInstance() != null && Glitch.getInstance().getModuleManager() != null) {
             List<Module> modules = Glitch.getInstance().getModuleManager().getModules();
