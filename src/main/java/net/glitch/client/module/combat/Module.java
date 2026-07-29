@@ -7,7 +7,6 @@ public class Module {
     private int key;
     private boolean enabled;
 
-    // Конструктор на 4 аргумента
     public Module(String name, String description, Category category, int key) {
         this.name = name;
         this.description = description;
@@ -16,42 +15,20 @@ public class Module {
         this.enabled = false;
     }
 
-    // Конструктор на 2 аргумента
     public Module(String name, Category category) {
         this(name, "", category, 0);
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public Category getCategory() { return category; }
+    public int getKey() { return key; }
+    public void setKey(int key) { this.key = key; }
 
-    public String getDescription() {
-        return description;
-    }
+    public boolean isEnabled() { return enabled; }
+    public boolean isToggled() { return enabled; }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public int getKey() {
-        return key;
-    }
-
-    public void setKey(int key) {
-        this.key = key;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public boolean isToggled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
     public void toggle() {
         this.enabled = !this.enabled;
