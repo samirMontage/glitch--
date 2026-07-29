@@ -13,11 +13,11 @@ import org.lwjgl.glfw.GLFW;
 public class Glitch implements ModInitializer, ClientModInitializer {
     public static Glitch INSTANCE;
     private ModuleManager moduleManager;
-    private static KeyBinding clickGuiKey;
+    public static KeyBinding clickGuiKey;
 
     @Override
     public void onInitialize() {
-        // Вызывается на этапе "main"
+        // Оставляем пустым для main эндпоинта
     }
 
     @Override
@@ -25,6 +25,7 @@ public class Glitch implements ModInitializer, ClientModInitializer {
         INSTANCE = this;
         moduleManager = new ModuleManager();
 
+        // 1. Создаем бинд
         clickGuiKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.glitch.clickgui",
                 InputUtil.Type.KEYSYM,
@@ -32,9 +33,10 @@ public class Glitch implements ModInitializer, ClientModInitializer {
                 "category.glitch"
         ));
 
+        // 2. Проверяем нажатие каждый тик клиента
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (clickGuiKey.wasPressed()) {
-                if (client.currentScreen == null) {
+            if (client.player != null && client.currentScreen == null) {
+                if (clickGuiKey.wasPressed()) {
                     client.openScreen(new ClickGuiScreen());
                 }
             }
