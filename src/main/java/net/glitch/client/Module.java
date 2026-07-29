@@ -1,42 +1,35 @@
-package net.glitch.client;
+package net.glitch.client.module;
 
-import net.glitch.client.setting.Setting;
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class Module {
+public class Module {
     private final String name;
-    private final String description;
     private final Category category;
-    private int key;
-    private boolean toggled;
-    private final List<Setting<?>> settings = new ArrayList<>();
+    private boolean enabled;
 
-    public Module(String name, String description, Category category, int key) {
+    public Module(String name, Category category) {
         this.name = name;
-        this.description = description;
         this.category = category;
-        this.key = key;
-        this.toggled = false;
+        this.enabled = false;
     }
 
-    public void addSetting(Setting<?> setting) {
-        this.settings.add(setting);
+    public String getName() {
+        return name;
     }
 
-    public List<Setting<?>> getSettings() {
-        return settings;
+    public Category getCategory() {
+        return category;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void toggle() {
-        setToggled(!toggled);
-    }
-
-    public void setToggled(boolean toggled) {
-        if (this.toggled == toggled) return;
-        this.toggled = toggled;
-
-        if (toggled) {
+        this.enabled = !this.enabled;
+        if (this.enabled) {
             onEnable();
         } else {
             onDisable();
@@ -45,12 +38,4 @@ public abstract class Module {
 
     public void onEnable() {}
     public void onDisable() {}
-    public void onUpdate() {}
-
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public Category getCategory() { return category; }
-    public int getKey() { return key; }
-    public void setKey(int key) { this.key = key; }
-    public boolean isToggled() { return toggled; }
 }
