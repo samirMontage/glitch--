@@ -18,14 +18,13 @@ public class KillAura extends Module {
         if (client.player == null || client.world == null) return;
 
         Entity target = null;
-        double minDistance = 4.2; // Радиус атаки
+        double minDistance = 4.2;
 
         for (Entity entity : client.world.getEntities()) {
             if (entity == client.player) continue;
             if (!(entity instanceof LivingEntity)) continue;
-            if (entity.isDead()) continue;
+            if (((LivingEntity) entity).isDead()) continue;
             
-            // На Рилик полезно бить и игроков, и мобов (в зависимости от режима)
             if (entity instanceof PlayerEntity || entity instanceof LivingEntity) {
                 double dist = client.player.distanceTo(entity);
                 if (dist < minDistance) {
@@ -37,7 +36,6 @@ public class KillAura extends Module {
 
         if (target != null) {
             ticks++;
-            // Бьем по кд кулдауна атаки (примерно каждые 10-12 тиков для меча)
             if (ticks >= 10) {
                 client.interactionManager.attackEntity(client.player, target);
                 client.player.swingHand(net.minecraft.util.Hand.MAIN_HAND);
