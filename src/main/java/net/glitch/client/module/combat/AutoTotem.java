@@ -6,6 +6,7 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
 
 public class AutoTotem extends Module {
+    private int delay = 0;
 
     public AutoTotem() {
         super("AutoTotem", Category.COMBAT);
@@ -15,8 +16,14 @@ public class AutoTotem extends Module {
         if (!isEnabled()) return;
         if (client.player == null || client.interactionManager == null) return;
 
-        // Проверяем, есть ли уже тотем в левой руке
+        // Если в левой руке уже тотем — ничего не делаем
         if (client.player.getOffHandStack().getItem() == Items.TOTEM_OF_UNDYING) {
+            delay = 0;
+            return;
+        }
+
+        if (delay > 0) {
+            delay--;
             return;
         }
 
@@ -25,6 +32,8 @@ public class AutoTotem extends Module {
             var stack = client.player.getInventory().getStack(i);
             if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
                 int slot = i < 9 ? i + 36 : i;
+                
+                // Безопасный перенос для античита
                 client.interactionManager.clickSlot(
                     client.player.currentScreenHandler.syncId,
                     slot,
@@ -34,7 +43,7 @@ public class AutoTotem extends Module {
                 );
                 client.interactionManager.clickSlot(
                     client.player.currentScreenHandler.syncId,
-                    45, // Слот офхенда (левой руки)
+                    45, // Слот левой руки
                     0,
                     SlotActionType.PICKUP,
                     client.player
@@ -46,6 +55,8 @@ public class AutoTotem extends Module {
                     SlotActionType.PICKUP,
                     client.player
                 );
+                
+                delay = 5; // Задержка в 5 тиков, чтобы античит не кикал за быстрый дроп/клики
                 break;
             }
         }
