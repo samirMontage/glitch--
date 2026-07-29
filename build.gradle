@@ -1,0 +1,19 @@
+plugins {
+    id 'fabric-loom' version '0.10-SNAPSHOT'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = "Glitch-Client"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.16.5"
+    mappings "net.fabricmc:yarn:1.16.5+build.10:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.12.12"
+}
