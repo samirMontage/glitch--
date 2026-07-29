@@ -7,24 +7,14 @@ public class Module {
     private int key;
     private boolean enabled;
 
-    public Module(String name, String description, Category category, int key) {
+    public Module(String name, Category category) {
         this.name = name;
-        this.description = description;
         this.category = category;
-        this.key = key;
         this.enabled = false;
     }
 
-    public Module(String name, Category category) {
-        this(name, "", category, 0);
-    }
-
     public String getName() { return name; }
-    public String getDescription() { return description; }
     public Category getCategory() { return category; }
-    public int getKey() { return key; }
-    public void setKey(int key) { this.key = key; }
-
     public boolean isEnabled() { return enabled; }
     public boolean isToggled() { return enabled; }
 
