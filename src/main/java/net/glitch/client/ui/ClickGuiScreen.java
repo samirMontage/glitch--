@@ -14,11 +14,9 @@ public class ClickGuiScreen extends Screen {
         super(Text.of("Glitch Client - ClickGUI"));
     }
 
-    @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         
-        // Безопасное получение списка модулей через публичный метод getInstance()
         if (Glitch.getInstance() != null && Glitch.getInstance().getModuleManager() != null) {
             List<Module> modules = Glitch.getInstance().getModuleManager().getModules();
             
@@ -35,7 +33,6 @@ public class ClickGuiScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        // Обработка кликов мыши по модулям
         if (button == 0 && Glitch.getInstance() != null && Glitch.getInstance().getModuleManager() != null) {
             List<Module> modules = Glitch.getInstance().getModuleManager().getModules();
             int y = 20;
