@@ -8,7 +8,7 @@ public class Glitch implements ModInitializer {
     private ModuleManager moduleManager;
 
     @Override
-    public onInitialize() {
+    public void onInitialize() {
         INSTANCE = this;
         moduleManager = new ModuleManager();
     }
