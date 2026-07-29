@@ -28,7 +28,8 @@ public class AutoTotem extends Module {
         }
 
         for (int i = 0; i < 36; i++) {
-            ItemStack stack = client.player.getInventory().getStack(i);
+            // Обрати внимание: здесь теперь поле inventory без круглых скобок
+            ItemStack stack = client.player.inventory.getStack(i);
             if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
                 int slot = i < 9 ? i + 36 : i;
                 
