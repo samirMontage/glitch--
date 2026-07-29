@@ -2,27 +2,67 @@ package net.glitch.client.module;
 
 public class Module {
     private final String name;
-    private final Category category;
-    private boolean toggled;
+    private String description;
+    private Category category;
+    private int key;
+    private boolean enabled;
 
-    public Module(String name, Category category) {
+    // Конструктор с 4 аргументами (для ClickGuiModule и других)
+    public Module(String name, String description, Category category, int key) {
         this.name = name;
+        this.description = description;
         this.category = category;
+        this.key = key;
+        this.enabled = false;
+    }
+
+    // Конструктор с 2 аргументами (для упрощенных модулей)
+    public Module(String name, Category category) {
+        this(name, "", category, 0);
     }
 
     public String getName() {
         return name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public Category getCategory() {
         return category;
     }
 
-    public boolean isToggled() {
-        return toggled;
+    public int getKey() {
+        return key;
     }
 
-    public void setToggled(boolean toggled) {
-        this.toggled = toggled;
+    public void setKey(int key) {
+        this.key = key;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    // Алиас для isEnabled(), чтобы AutoTotem и другие модули не выдавали ошибку
+    public boolean isToggled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void toggle() {
+        this.enabled = !this.enabled;
+        if (this.enabled) {
+            onEnable();
+        } else {
+            onDisable();
+        }
+    }
+
+    public void onEnable() {}
+    public void onDisable() {}
 }
